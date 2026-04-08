@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neue Agentur | Digitale Exzellenz für dein Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ──────────── RESET & VARIABLES ──────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f0f0f0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f5f5;
+  --accent: #1a1a1a;
+  --accent-dim: #333333;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --border: #e4e4e4;
+  --border-light: #d5d5d5;
+  --nav-bg: rgba(250,250,250,.88);
+  --nav-border: rgba(0,0,0,.06);
+  --glow-1: rgba(26,26,26,.04);
+  --glow-2: rgba(26,26,26,.02);
+  --badge-bg: rgba(26,26,26,.06);
+  --badge-border: rgba(26,26,26,.12);
+  --gradient-start: #1a1a1a;
+  --gradient-mid: #444444;
+  --gradient-end: #1a1a1a;
+  --shadow-cta: rgba(26,26,26,.2);
+  --block-bg: rgba(26,26,26,.06);
+  --block-border: rgba(26,26,26,.06);
+  --block-accent: rgba(26,26,26,.1);
+  --mockup-bar: rgba(0,0,0,.04);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --transition: cubic-bezier(.25,.46,.45,.94);
+}
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #161616;
+  --bg-card-hover: #1c1c1c;
+  --accent: #c8ff00;
+  --accent-dim: #a5d600;
+  --text-primary: #f5f5f5;
+  --text-secondary: #9a9a9a;
+  --text-muted: #5a5a5a;
+  --border: #222222;
+  --border-light: #2a2a2a;
+  --nav-bg: rgba(10,10,10,.82);
+  --nav-border: rgba(255,255,255,.04);
+  --glow-1: rgba(200,255,0,.06);
+  --glow-2: rgba(200,255,0,.03);
+  --badge-bg: rgba(200,255,0,.08);
+  --badge-border: rgba(200,255,0,.15);
+  --gradient-start: #c8ff00;
+  --gradient-mid: #e0ff66;
+  --gradient-end: #a5d600;
+  --shadow-cta: rgba(200,255,0,.3);
+  --block-bg: rgba(200,255,0,.06);
+  --block-border: rgba(200,255,0,.08);
+  --block-accent: rgba(200,255,0,.15);
+  --mockup-bar: rgba(0,0,0,.3);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background .5s var(--transition), color .5s var(--transition);
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ──────────── CONTAINER ──────────── */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ──────────── NAVIGATION ──────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: padding .4s var(--transition);
+}
+.nav.scrolled { padding: 12px 0; }
+.nav .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -.02em;
+  color: var(--text-primary);
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color .3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px;
+  background: var(--accent);
+  transition: width .3s var(--transition);
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--accent) !important;
+  color: var(--bg-primary) !important;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: .85rem;
+  transition: transform .3s, box-shadow .3s;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 24px var(--shadow-cta); color: var(--bg-primary) !important; }
+
+/* Theme switch */
+.theme-switch {
+  display: flex; align-items: center; gap: 10px;
+  margin-left: 8px;
+}
+.theme-switch-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 600;
+  user-select: none;
+}
+.theme-switch-track {
+  position: relative;
+  width: 48px; height: 26px;
+  background: var(--border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background .4s var(--transition);
+  border: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+.theme-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  transition: transform .4s var(--transition), background .4s;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
+[data-theme="dark"] .theme-switch-track {
+  background: var(--accent);
+  border-color: var(--accent-dim);
+}
+[data-theme="dark"] .theme-switch-track::after {
+  transform: translateX(22px);
+  background: var(--bg-primary);
+}
+.theme-switch-icon {
+  font-size: .85rem;
+  line-height: 1;
+  transition: opacity .3s;
+}
+.theme-switch-icon.sun { opacity: 1; }
+.theme-switch-icon.moon { opacity: .4; }
+[data-theme="dark"] .theme-switch-icon.sun { opacity: .4; }
+[data-theme="dark"] .theme-switch-icon.moon { opacity: 1; }
+
+/* Mobile menu */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: .3s; border-radius: 2px; }
+
+/* ──────────── HERO ──────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -40%; right: -20%; width: 700px; height: 700px;
+  background: radial-gradient(circle, var(--glow-1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -20%; left: -10%; width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--glow-2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px 6px 8px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  border-radius: 100px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 28px;
+  animation: fadeInDown .8s var(--transition) both;
+}
+.hero-badge .dot {
+  width: 7px; height: 7px; background: var(--accent); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  margin-bottom: 24px;
+  animation: fadeInUp .8s .15s var(--transition) both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: 40px;
+  animation: fadeInUp .8s .3s var(--transition) both;
+}
+.hero-buttons {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeInUp .8s .45s var(--transition) both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 32px;
+  background: var(--accent);
+  color: var(--bg-primary);
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: transform .3s, box-shadow .3s;
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--shadow-cta); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 32px;
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: .9rem;
+  border: 1px solid var(--border-light);
+  transition: border-color .3s, background .3s;
+  cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--text-muted); background: var(--glow-2); }
+
+/* Hero Visual */
+.hero-visual {
+  position: relative;
+  animation: fadeInRight 1s .4s var(--transition) both;
+}
+.hero-mockup {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+.hero-mockup-bar {
+  display: flex; gap: 6px; padding: 14px 18px;
+  background: var(--mockup-bar);
+  border-bottom: 1px solid var(--border);
+}
+.hero-mockup-bar span { width: 10px; height: 10px; border-radius: 50%; }
+.hero-mockup-bar span:nth-child(1) { background: #ff5f57; }
+.hero-mockup-bar span:nth-child(2) { background: #ffbd2e; }
+.hero-mockup-bar span:nth-child(3) { background: #28c840; }
+.hero-mockup-content {
+  padding: 30px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.hero-mockup-block {
+  height: 80px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--block-bg), var(--glow-2));
+  border: 1px solid var(--block-border);
+}
+.hero-mockup-block.wide { grid-column: span 2; height: 60px; }
+.hero-mockup-block.accent { background: linear-gradient(135deg, var(--block-accent), var(--block-bg)); }
+.hero-float {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+  animation: float 4s ease-in-out infinite;
+}
+.hero-float-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.hero-float-text small { color: var(--text-muted); font-size: .72rem; display: block; }
+.hero-float-text strong { font-size: .9rem; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ──────────── LOGO MARQUEE ──────────── */
+.logo-strip {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.logo-strip-label {
+  text-align: center;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track .logo-item {
+  flex-shrink: 0;
+  padding: 0 40px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  opacity: .45;
+  white-space: nowrap;
+  transition: opacity .3s;
+}
+.marquee-track .logo-item:hover { opacity: .8; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ──────────── INTRO TEXT ──────────── */
+.intro {
+  padding: 100px 0;
+  text-align: center;
+}
+.intro p {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* ──────────── SERVICES ──────────── */
+.services {
+  padding: 80px 0 120px;
+}
+.section-label {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 60px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  transition: border-color .4s, transform .4s var(--transition), background .4s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--transition);
+}
+.service-card:hover { border-color: var(--border-light); transform: translateY(-4px); background: var(--bg-card-hover); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-number {
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.service-card p {
+  color: var(--text-secondary);
+  font-size: .92rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: gap .3s;
+}
+.service-link:hover { gap: 12px; }
+
+/* ──────────── CTA BANNER ──────────── */
+.cta-banner {
+  padding: 80px 0;
+}
+.cta-banner-inner {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--glow-1) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 60px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.cta-banner-inner h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.cta-banner-inner p {
+  color: var(--text-secondary);
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+/* ──────────── COMPETITION / PORTFOLIO ──────────── */
+.portfolio {
+  padding: 80px 0 100px;
+}
+.portfolio-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+.portfolio-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+}
+.portfolio-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.portfolio-item {
+  aspect-ratio: 4/3;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  transition: transform .4s var(--transition), border-color .3s;
+}
+.portfolio-item:hover { transform: translateY(-4px) scale(1.01); border-color: var(--border-light); }
+.portfolio-item-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--glow-1), var(--glow-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+/* ──────────── ABOUT / MISSION ──────────── */
+.about {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+.about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-image {
+  aspect-ratio: 3/4;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+.about-image-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, var(--glow-1) 0%, var(--glow-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; color: var(--text-muted);
+}
+.about-label {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.about h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: 24px;
+}
+.about-text {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: .95rem;
+}
+.about-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--accent); font-weight: 600; font-size: .9rem;
+  transition: gap .3s;
+}
+.about-link:hover { gap: 14px; }
+
+/* ──────────── VALUES ──────────── */
+.values {
+  padding: 80px 0 100px;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.value-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  transition: transform .4s var(--transition), border-color .3s;
+}
+.value-card:hover { transform: translateY(-3px); border-color: var(--border-light); }
+.value-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.value-card p {
+  color: var(--text-secondary);
+  font-size: .88rem;
+  line-height: 1.7;
+}
+
+/* ──────────── TESTIMONIALS ──────────── */
+.testimonials {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+.testimonials-header { text-align: center; margin-bottom: 60px; }
+.testimonials-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.testimonials-header h2 span { color: var(--accent); }
+.testimonials-header p {
+  color: var(--text-secondary);
+  margin-top: 12px;
+  max-width: 550px;
+  margin-left: auto; margin-right: auto;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  transition: transform .4s var(--transition), border-color .3s;
+}
+.testimonial-card:hover { transform: translateY(-3px); border-color: var(--border-light); }
+.testimonial-stars { color: var(--accent); margin-bottom: 16px; font-size: .85rem; letter-spacing: 2px; }
+.testimonial-card h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .95rem;
+  margin-bottom: 12px;
+}
+.testimonial-card p {
+  color: var(--text-secondary);
+  font-size: .88rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.testimonial-author {
+  font-weight: 600;
+  font-size: .85rem;
+  color: var(--text-primary);
+}
+
+/* ──────────── FAQ ──────────── */
+.faq {
+  padding: 100px 0;
+}
+.faq-header { text-align: center; margin-bottom: 50px; }
+.faq-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: color .3s;
+}
+.faq-question:hover { color: var(--accent); }
+.faq-icon {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: transform .3s, border-color .3s, color .3s;
+}
+.faq-item.active .faq-icon { transform: rotate(45deg); border-color: var(--accent); color: var(--accent); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s var(--transition), padding .4s;
+}
+.faq-item.active .faq-answer { max-height: 300px; }
+.faq-answer p {
+  padding-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: .92rem;
+  line-height: 1.75;
+}
+
+/* ──────────── CONTACT / FOOTER CTA ──────────── */
+.contact {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+.contact .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+.contact-intro {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.contact-person {
+  display: flex; align-items: center; gap: 16px;
+}
+.contact-avatar {
+  width: 56px; height: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+.contact-person-name { font-weight: 700; }
+.contact-person-role { color: var(--text-muted); font-size: .82rem; }
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.form-group input, .form-group textarea, .form-group select {
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: .9rem;
+  transition: border-color .3s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--accent);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-checkboxes { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0; }
+.form-checkbox {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.form-checkbox input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.form-submit {
+  padding: 16px 36px;
+  background: var(--accent);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+  align-self: flex-start;
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--shadow-cta); }
+
+/* ──────────── FOOTER ──────────── */
+.footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+}
+.footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+.footer-brand p { color: var(--text-secondary); font-size: .88rem; line-height: 1.7; margin-top: 16px; max-width: 300px; }
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .88rem;
+  margin-bottom: 18px;
+}
+.footer-col a {
+  display: block;
+  padding: 4px 0;
+  color: var(--text-secondary);
+  font-size: .85rem;
+  transition: color .3s;
+}
+.footer-col a:hover { color: var(--text-primary); }
+.footer-bottom {
+  margin-top: 50px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .8rem;
+}
+
+/* ──────────── ANIMATIONS ──────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .7s var(--transition), transform .7s var(--transition);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──────────── RESPONSIVE ──────────── */
+@media (max-width: 1024px) {
+  .hero .container { grid-template-columns: 1fr; text-align: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { max-width: 500px; margin: 0 auto; }
+  .services-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .about .container { grid-template-columns: 1fr; gap: 40px; }
+  .about-image { max-width: 400px; }
+  .values-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact .container { grid-template-columns: 1fr; gap: 50px; }
+  .cta-banner-inner { flex-direction: column; text-align: center; }
+  .footer .container { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    gap: 16px;
+  }
+  .hero { padding: 120px 0 60px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer .container { grid-template-columns: 1fr; }
+  .cta-banner-inner { padding: 36px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAVIGATION ═══════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">NEUER<span>.</span>KUNDE</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#ueber">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#kontakt" class="nav-cta">Anfrage starten</a>
+    </div>
+    <div class="theme-switch">
+      <span class="theme-switch-icon sun">☀️</span>
+      <div class="theme-switch-track" id="themeToggle" role="switch" aria-checked="false" aria-label="Dunkelmodus umschalten" tabindex="0"></div>
+      <span class="theme-switch-icon moon">🌙</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Für Ostbelgien &amp; Deutschlandweit
+      </div>
+      <h1>
+        Digitale Infrastrukturen,<br>
+        <span class="gradient-text">die deine Marke skalieren</span>
+      </h1>
+      <p class="hero-sub">
+        Strategisches Branding, High-End UX/UI und Designsysteme für Web-Erlebnisse, die Realdaten rocken und Weltmarktführer-Level liefern.
+      </p>
+      <div class="hero-buttons">
+        <a href="#kontakt" class="btn-primary">Beratungsgespräch vereinbaren →</a>
+        <a href="#projekte" class="btn-secondary">Projekte ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mockup">
+        <div class="hero-mockup-bar"><span></span><span></span><span></span></div>
+        <div class="hero-mockup-content">
+          <div class="hero-mockup-block accent"></div>
+          <div class="hero-mockup-block"></div>
+          <div class="hero-mockup-block wide"></div>
+          <div class="hero-mockup-block"></div>
+          <div class="hero-mockup-block accent"></div>
+        </div>
+      </div>
+      <div class="hero-float">
+        <div class="hero-float-icon">⚡</div>
+        <div class="hero-float-text">
+          <small>Performance</small>
+          <strong>98 / 100</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LOGO MARQUEE ═══════ -->
+<section class="logo-strip">
+  <p class="logo-strip-label">Vertraut von führenden Unternehmen</p>
+  <div class="marquee-track">
+    <div class="logo-item">KUNDENLOGO</div>
+    <div class="logo-item">PARTNERAGENTUR</div>
+    <div class="logo-item">TECH FIRMA</div>
+    <div class="logo-item">IT-SERVICE</div>
+    <div class="logo-item">STARTUP XY</div>
+    <div class="logo-item">CONSULTING</div>
+    <div class="logo-item">MEDIENHAUS</div>
+    <div class="logo-item">KUNDENLOGO</div>
+    <div class="logo-item">PARTNERAGENTUR</div>
+    <div class="logo-item">TECH FIRMA</div>
+    <div class="logo-item">IT-SERVICE</div>
+    <div class="logo-item">STARTUP XY</div>
+    <div class="logo-item">CONSULTING</div>
+    <div class="logo-item">MEDIENHAUS</div>
+  </div>
+</section>
+
+<!-- ═══════ INTRO ═══════ -->
+<section class="intro reveal">
+  <div class="container">
+    <p>
+      Du suchst keine gewöhnliche Agentur, sondern einen Partner für echte digitale Exzellenz? 
+      Als inhabergeführte Werbeagentur mit Full-Service-DNA verbinden wir strategische Markenführung 
+      und Corporate Design mit wirkungsvollen UI/UX-Designsystemen, die mit deinem Unternehmen wachsen.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ SERVICES ═══════ -->
+<section class="services reveal" id="leistungen">
+  <div class="container">
+    <p class="section-label">Webdesign, Branding &amp; mehr</p>
+    <h2 class="section-title">Unsere Leistungen</h2>
+    <p class="section-subtitle">Vier Dinge, die wir richtig gut können.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3>Branding</h3>
+        <p>Ob Markenstrategie, Corporate Design oder Brand-Implementation: Wir entwickeln eine Identität, die emotional packt, Kunden bindet und dich klar von der Masse abhebt.</p>
+        <a href="#" class="service-link">Mehr erfahren →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3>Offline</h3>
+        <p>Von hochwertiger Geschäftsausstattung bis hin zu aufmerksamkeitsstarken Printmedien: Wir bringen deine digitale Exzellenz in die haptische Welt.</p>
+        <a href="#" class="service-link">Mehr erfahren →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3>Online</h3>
+        <p>Webdesign, UI/UX-Optimierung oder SEO-Integration: Responsive, schnell und konvertierstark, damit du mehr Anfragen und Umsatz direkt über deine Site generierst.</p>
+        <a href="#" class="service-link">Mehr erfahren →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3>UI/UX Designsystem</h3>
+        <p>UI-Kits, Component-Libraries oder Design-System-Setup: Einmal entwickelt, überall einsetzbar. Zeit sparen, Konsistenz sichern, immer on-brand bleiben.</p>
+        <a href="#" class="service-link">Mehr erfahren →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA BANNER ═══════ -->
+<section class="cta-banner reveal">
+  <div class="container">
+    <div class="cta-banner-inner">
+      <div>
+        <h2>Bereit für deinen Erfolg?</h2>
+        <p>In einem unverbindlichen Erstgespräch klären wir deine Ziele und finden gemeinsam heraus, wie dein Produkt oder deine Website optimal sichtbar wird.</p>
+      </div>
+      <a href="#kontakt" class="btn-primary">Anfrage starten →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PORTFOLIO ═══════ -->
+<section class="portfolio reveal" id="projekte">
+  <div class="container">
+    <div class="portfolio-header">
+      <h2>Deine Konkurrenz wird Augen machen.</h2>
+      <p>Warum sich mit Standard zufriedengeben, wenn du das Benchmark deiner Branche sein kannst? In nur 30 Tagen bauen wir dir eine Seite, die Leads liefert und deine Mitbewerber alt aussehen lässt.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 1</div></div>
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 2</div></div>
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 3</div></div>
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 4</div></div>
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 5</div></div>
+      <div class="portfolio-item"><div class="portfolio-item-inner">Projekt 6</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about reveal" id="ueber">
+  <div class="container">
+    <div class="about-image">
+      <div class="about-image-placeholder">Portraitfoto</div>
+    </div>
+    <div>
+      <p class="about-label">Mission und Werte</p>
+      <h2>Meine Mission: Design, das sichtbar wirkt.</h2>
+      <p class="about-text">
+        Hallo, ich bin [Name]. Als Gründer:in bringe ich die Expertise aus über 20 Jahren Agenturerfahrung 
+        und spezialisiertem High-End UX/UI Design direkt in jedes unserer Projekte. 
+        Heute sind wir hier zuhause, um dieses Profi-Level für den Mittelstand und lokale Businesses zugänglich zu machen.
+      </p>
+      <a href="#" class="about-link">Mehr über mich →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ VALUES ═══════ -->
+<section class="values reveal">
+  <div class="container">
+    <div class="values-grid">
+      <div class="value-card">
+        <h3>Vom Fundament zur unverwechselbaren Identität</h3>
+        <p>Von der strategischen Konzeption deiner Corporate Identity bis zum fertigen Logo entwickeln wir ein Design, das deine Werte authentisch widerspiegelt und über alle Kanäle hinweg konsistent bleibt.</p>
+      </div>
+      <div class="value-card">
+        <h3>High-End Webdesign für skalierbares Wachstum</h3>
+        <p>Deine Website ist das Herzstück deiner Online-Präsenz. Wir entwickeln Webdesign-Lösungen, die als modulare Systeme mit deinem Erfolg mitwachsen und mit gezielter SEO-Optimierung maximale Sichtbarkeit erzielen.</p>
+      </div>
+      <div class="value-card">
+        <h3>Konsistenz bis in die Fingerspitzen</h3>
+        <p>Ein hochwertiges Erscheinungsbild endet nicht am Bildschirm. Ob edle Geschäftsausstattung oder eine durchschlagende Kampagne im Print-Bereich: Wir bringen deine Marke in die reale Welt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TESTIMONIALS ═══════ -->
+<section class="testimonials reveal">
+  <div class="container">
+    <div class="testimonials-header">
+      <h2>Ergebnisse, die <span>für sich sprechen.</span></h2>
+      <p>Meine Kund:innen gewinnen Klarheit, Sichtbarkeit und Professionalität durch Websites und Shops, die wirklich funktionieren.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <h4>Ich bin sehr zufrieden</h4>
+        <p>Wir arbeiten schon seit Jahren erfolgreich zusammen. Ob UX-Projekt, Website oder Print, sowohl wir als auch unsere Kunden sind immer zufrieden mit dem Ergebnis.</p>
+        <div class="testimonial-author">Max Mustermann</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <h4>Kreativität trifft Technik</h4>
+        <p>Die Zusammenarbeit war hervorragend. Detailgenauigkeit und Kreativität gepaart mit technischem Verständnis: Eine uneingeschränkte Empfehlung.</p>
+        <div class="testimonial-author">Anna Beispiel</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <h4>Jederzeit wieder!</h4>
+        <p>Super Beratung, sehr schnelle Umsetzung bei vorgegebenem engen Zeitfenster. Wir können eine Zusammenarbeit nur empfehlen!</p>
+        <div class="testimonial-author">Alexander Pfau</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="faq reveal">
+  <div class="container">
+    <div class="faq-header">
+      <h2>Häufige Fragen</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          Warum ist ganzheitliches Branding wichtiger als nur ein neues Logo?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Ein Logo ist nur ein Teil deiner Identität. Wir entwickeln ein fundiertes Corporate Design und eine klare Positionierung. So wird dein Markenauftritt über alle Kanäle hinweg unverwechselbar und erzielt wirkungsvolle Resonanz bei deiner Zielgruppe.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Wie stellt ihr eine professionelle Online-Präsenz sicher?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nach der strategischen Konzeption erstellen wir Webdesign-Lösungen, die technisch und visuell überzeugend sind. Wir integrieren von Anfang an eine gezielte SEO-Optimierung, damit deine Online-Präsenz nicht nur gut aussieht, sondern auch bei Google gefunden wird.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Begleitet ihr uns auch beim Employer Branding?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Absolut. Ein starkes Employer Branding ist heute entscheidend, um qualifizierte Mitarbeitende zu gewinnen. Wir entwickeln Strategien, die deine Authentizität als Arbeitgeber unterstreichen und deine Werte professionell nach außen tragen.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Bietet ihr auch klassische Kreation und Print an?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Ja, unsere Wurzeln liegen in der Kreation. Ob haptischer Print, Packaging oder eine durchschlagende Kampagne: Als inhabergeführte Agentur bieten wir dir den Full-Service, den du für eine durchgängige Corporate Identity benötigst.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Wie läuft die Zusammenarbeit ab?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Wir setzen auf Transparenz und Expertise. Vom ersten Workshop bis zur finalen Erstellung deines Projekts arbeiten wir eng mit dir zusammen. Wirf gerne einen Blick auf unsere Referenzen, um zu sehen, welche innovativen Lösungen wir bereits umgesetzt haben.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="contact reveal" id="kontakt">
+  <div class="container">
+    <div>
+      <h2>Erreiche deine Ziele mit einem Markenauftritt, den wir ganzheitlich umsetzen.</h2>
+      <p class="contact-intro">
+        Planst du ein digitales Produkt, eine neue Webseite oder möchtest du ein bestehendes verbessern? 
+        In einem unverbindlichen Erstgespräch beantworte ich gerne all deine Fragen.
+      </p>
+      <div class="contact-person">
+        <div class="contact-avatar">NK</div>
+        <div>
+          <div class="contact-person-name">[Vorname Nachname]</div>
+          <div class="contact-person-role">Inhaber:in &amp; Creative Director</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname</label>
+          <input type="text" placeholder="Dein Vorname">
+        </div>
+        <div class="form-group">
+          <label>Nachname</label>
+          <input type="text" placeholder="Dein Nachname">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" placeholder="name@firma.de">
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" placeholder="+49 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Für welche Dienstleistungen interessierst du dich?</label>
+        <div class="form-checkboxes">
+          <label class="form-checkbox"><input type="checkbox"> Branding</label>
+          <label class="form-checkbox"><input type="checkbox"> Offline</label>
+          <label class="form-checkbox"><input type="checkbox"> UI/UX Design</label>
+          <label class="form-checkbox"><input type="checkbox"> Online</label>
+          <label class="form-checkbox"><input type="checkbox"> Sonstiges</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nachricht</label>
+        <textarea placeholder="Erzähl uns von deinem Projekt..."></textarea>
+      </div>
+      <button class="form-submit">Senden →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">NEUER<span style="color:var(--accent)">.</span>KUNDE</a>
+      <p>Wir verbinden UX-Strategie, klares Webdesign und moderne Entwicklung zu digitalen Produkten, die wirken: sichtbar, funktional und ästhetisch.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#">Homepage</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#ueber">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <div class="footer-col">
+      <h4>Leistungen</h4>
+      <a href="#">Branding</a>
+      <a href="#">Offline</a>
+      <a href="#">Online</a>
+      <a href="#">UI/UX Designsystem</a>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutzerklärung</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">© 2026 Neuer Kunde. Alle Rechte vorbehalten.</div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  themeToggle.setAttribute('aria-checked', !isDark);
+  localStorage.setItem('theme', next);
+});
+themeToggle.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); themeToggle.click(); }
+});
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile toggle
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    if (!wasActive) item.classList.add('active');
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
